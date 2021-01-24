@@ -9,14 +9,12 @@ import { useState } from "react";
 
 const theme = {
   light: {
-    description: "light",
     mainColor: "#242424", // main font color
     backgroundColor: "#fefafb", // main background color
     pink: "#ff85a2",
     red: "#ff3232",
   },
   dark: {
-    description: "dark",
     mainColor: "#fefafb", // main font color
     backgroundColor: "#242424", // main background color
     pink: "#ff85a2",
@@ -24,18 +22,16 @@ const theme = {
   },
 };
 
-const ToggleCurrentTheme = () => {
-  const [currentTheme, setCurrentTheme] = useState(theme.light);
-  if (currentTheme === theme.light) setCurrentTheme(theme.dark);
-  else setCurrentTheme(theme.light);
-};
 function App() {
+  const [currentTheme, setCurrentTheme] = useState("light");
+  const ToggleCurrentTheme = () => {
+    if (currentTheme === "light") setCurrentTheme("dark");
+    else setCurrentTheme("light");
+  };
   return (
-    <ThemeProvider theme={light.theme}>
+    <ThemeProvider theme={theme[currentTheme]}>
       <GlobalStyle />
-      <ThemeButton onClick={() => ToggleCurrentTheme}>
-        {theme.description}
-      </ThemeButton>
+      <ThemeButton onClick={ToggleCurrentTheme}>☀️/🌙</ThemeButton>
       <Home />
       <CookieList />
     </ThemeProvider>
